@@ -63,7 +63,7 @@ nav.links a{color:var(--ink);text-decoration:none;font-weight:400} nav.links a:h
 .hero h1 em{color:var(--clay)}
 .hero p{font-size:clamp(17px,1.4vw,19px);color:var(--body);max-width:34em;margin-top:28px}
 .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
-.arch{aspect-ratio:560/680;max-width:100%;border-radius:999px 999px 12px 12px}
+.arch{display:block;width:100%;height:auto;object-fit:cover;object-position:50% 40%;background:var(--tan);aspect-ratio:560/680;max-width:100%;border-radius:999px 999px 12px 12px}
 @media (max-width:820px){.hero{grid-template-columns:1fr}.arch{max-width:420px;width:100%;justify-self:center}}
 
 section{padding-block:clamp(64px,8vw,120px)}
@@ -176,7 +176,7 @@ footer .brand span{color:var(--ivory);font-size:24px}
         <a class="btn btn-line" href="#services" data-i="hero.cta2"></a>
       </div>
     </div>
-    <div class="ph arch" data-i="photo.hero"></div>
+    <img class="arch" src="hero.jpg" alt="Oksaesthetic" width="767" height="956">
   </div>
 
   <section id="approach" class="sand">
