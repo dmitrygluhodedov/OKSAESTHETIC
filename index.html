@@ -134,6 +134,8 @@ dt{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#BBAC9F;fon
 dd{margin:8px 0 0;font-family:var(--serif);font-size:24px;overflow-wrap:anywhere}
 @media (max-width:820px){.book{grid-template-columns:1fr}}
 @media (max-width:420px){dl{grid-template-columns:1fr}}
+dd a,footer a{color:inherit;text-underline-offset:4px;text-decoration-thickness:1px}
+dd a:hover,footer a:hover{color:var(--blush)}
 footer{background:var(--ink);color:#BBAC9F;border-top:1px solid #3D3531;font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-block:36px}
 footer .brand span{color:var(--ivory);font-size:24px}
@@ -243,7 +245,7 @@ footer .brand span{color:var(--ivory);font-size:24px}
       <span class="sub">SKIN · BROWS · LASER</span>
     </div>
     <div class="foot-meta">
-      <span>@[oksaesthetic]</span>
+      <a href="https://www.instagram.com/oksaesthetic/" target="_blank" rel="noopener">@oksaesthetic</a>
       <span data-i="footer"></span>
     </div>
   </div>
@@ -273,7 +275,7 @@ var COPY = {
       quote:"«Я хочу, чтобы вы уходили не просто красивой — а уверенной в своей коже.»"},
     rev:{title:"Отзывы клиентов",text:"[Реальный отзыв клиента — вставьте из Instagram или Google.]",name:"[Имя клиента]"},
     book:{title1:"Готовы",titleEm:"начать?",sub:"Запишитесь на консультацию — подберём процедуру и составим план под вашу кожу.",cta:"Записаться онлайн",
-      contacts:[["Адрес","[АДРЕС СТУДИИ]"],["Телефон","[+00 000 000 000]"],["Instagram","@[oksaesthetic]"],["Часы работы","[Пн–Сб, 10–19]"]]},
+      contacts:[["Адрес","[АДРЕС СТУДИИ]"],["Телефон","[+00 000 000 000]"],["Instagram","@oksaesthetic"],["Часы работы","[Пн–Сб, 10–19]"]]},
     footer:"© 2026 Oksaesthetic. Все права защищены."
   },
   ES: {
@@ -298,7 +300,7 @@ var COPY = {
       quote:"«Quiero que salgas no solo guapa, sino segura de tu piel.»"},
     rev:{title:"Opiniones",text:"[Opinión real de una clienta: cópiala de Instagram o Google.]",name:"[Nombre de la clienta]"},
     book:{title1:"¿Lista para",titleEm:"empezar?",sub:"Reserva una consulta: elegiremos el tratamiento y crearemos un plan para tu piel.",cta:"Reservar online",
-      contacts:[["Dirección","[DIRECCIÓN]"],["Teléfono","[+00 000 000 000]"],["Instagram","@[oksaesthetic]"],["Horario","[Lun–Sáb, 10–19]"]]},
+      contacts:[["Dirección","[DIRECCIÓN]"],["Teléfono","[+00 000 000 000]"],["Instagram","@oksaesthetic"],["Horario","[Lun–Sáb, 10–19]"]]},
     footer:"© 2026 Oksaesthetic. Todos los derechos reservados."
   },
   EN: {
@@ -323,7 +325,7 @@ var COPY = {
       quote:"“I want you to leave not just looking beautiful, but confident in your skin.”"},
     rev:{title:"Client reviews",text:"[A real client review — paste it from Instagram or Google.]",name:"[Client name]"},
     book:{title1:"Ready to",titleEm:"begin?",sub:"Book a consultation and we’ll choose the treatment and build a plan around your skin.",cta:"Book online",
-      contacts:[["Address","[STUDIO ADDRESS]"],["Phone","[+00 000 000 000]"],["Instagram","@[oksaesthetic]"],["Hours","[Mon–Sat, 10–19]"]]},
+      contacts:[["Address","[STUDIO ADDRESS]"],["Phone","[+00 000 000 000]"],["Instagram","@oksaesthetic"],["Hours","[Mon–Sat, 10–19]"]]},
     footer:"© 2026 Oksaesthetic. All rights reserved."
   }
 };
@@ -341,7 +343,7 @@ function render(lang){
       '</ul><a class="btn" href="#booking">'+esc(t.svc.cta)+'</a></article>';}).join("");
   document.getElementById("steps").innerHTML=t.proc.steps.map(function(s,i){return '<div class="step"><div class="n">0'+(i+1)+'</div><div><h3>'+esc(s.title)+'</h3><p>'+esc(s.text)+'</p></div></div>';}).join("");
   document.getElementById("revs").innerHTML=[1,2,3].map(function(){return '<figure><div class="q" aria-hidden="true">“</div><blockquote>'+esc(t.rev.text)+'</blockquote><figcaption>'+esc(t.rev.name)+'</figcaption></figure>';}).join("");
-  document.getElementById("contacts").innerHTML=t.book.contacts.map(function(c){return '<div><dt>'+esc(c[0])+'</dt><dd>'+esc(c[1])+'</dd></div>';}).join("");
+  document.getElementById("contacts").innerHTML=t.book.contacts.map(function(c){return '<div><dt>'+esc(c[0])+'</dt><dd>'+(c[1].charAt(0)==="@"?'<a href="https://www.instagram.com/oksaesthetic/" target="_blank" rel="noopener">'+esc(c[1])+'</a>':esc(c[1]))+'</dd></div>';}).join("");
   try{localStorage.setItem("oks-lang-v2",lang);}catch(e){}
 }
 var start="ES";
