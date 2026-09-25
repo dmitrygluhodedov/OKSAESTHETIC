@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ru">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Oksaesthetic</title>
 <meta name="description" content="Oksaesthetic — камерная студия эстетики: уход за кожей, перманентный макияж, лазер и IPL.">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
 <style>
@@ -154,8 +154,8 @@ footer .brand span{color:var(--ivory);font-size:24px}
     </nav>
     <div class="right">
       <div class="lang" role="group" aria-label="Language">
-        <button type="button" id="lang-ru" data-lang="RU">RU</button>
         <button type="button" id="lang-es" data-lang="ES">ES</button>
+        <button type="button" id="lang-ru" data-lang="RU">RU</button>
         <button type="button" id="lang-en" data-lang="EN">EN</button>
       </div>
       <a class="btn btn-clay" href="#booking" data-i="nav.book"></a>
@@ -330,7 +330,7 @@ var COPY = {
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function get(o,p){return p.split(".").reduce(function(a,k){return a&&a[k];},o);}
 function render(lang){
-  var t=COPY[lang]||COPY.RU;
+  var t=COPY[lang]||COPY.ES;
   document.documentElement.lang=lang.toLowerCase();
   document.querySelectorAll("[data-i]").forEach(function(el){var v=get(t,el.getAttribute("data-i"));if(v!=null)el.textContent=v;});
   document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===lang?"true":"false");});
@@ -342,10 +342,10 @@ function render(lang){
   document.getElementById("steps").innerHTML=t.proc.steps.map(function(s,i){return '<div class="step"><div class="n">0'+(i+1)+'</div><div><h3>'+esc(s.title)+'</h3><p>'+esc(s.text)+'</p></div></div>';}).join("");
   document.getElementById("revs").innerHTML=[1,2,3].map(function(){return '<figure><div class="q" aria-hidden="true">“</div><blockquote>'+esc(t.rev.text)+'</blockquote><figcaption>'+esc(t.rev.name)+'</figcaption></figure>';}).join("");
   document.getElementById("contacts").innerHTML=t.book.contacts.map(function(c){return '<div><dt>'+esc(c[0])+'</dt><dd>'+esc(c[1])+'</dd></div>';}).join("");
-  try{localStorage.setItem("oks-lang",lang);}catch(e){}
+  try{localStorage.setItem("oks-lang-v2",lang);}catch(e){}
 }
-var start="RU";
-try{var s=localStorage.getItem("oks-lang");if(s&&COPY[s])start=s;}catch(e){}
+var start="ES";
+try{var s=localStorage.getItem("oks-lang-v2");if(s&&COPY[s])start=s;}catch(e){}
 document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){render(b.dataset.lang);});});
 render(start);
 </script>
