@@ -46,14 +46,14 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:rg
 .lockup .sub{font-size:11px;letter-spacing:.4em;color:#BBAC9F;font-weight:400}
 .foot-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;text-align:right}
 @media (max-width:640px){.foot-meta{align-items:flex-start;text-align:left}}
-nav.links{display:flex;gap:36px;font-size:15px;letter-spacing:.04em}
+nav.links{display:flex;gap:28px;font-size:15px;letter-spacing:.04em}
 nav.links a{color:var(--ink);text-decoration:none;font-weight:400} nav.links a:hover{color:var(--clay)}
 .right{display:flex;align-items:center;gap:16px}
 .lang{display:flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px}
 .lang button{height:36px;min-width:44px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:400 13px var(--sans);letter-spacing:.08em;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--ink);color:var(--ivory)}
 .right .btn{min-height:46px;padding:0 24px}
-@media (max-width:1020px){nav.links{display:none}}
+@media (max-width:1180px){nav.links{display:none}}
 @media (max-width:560px){.right .btn{display:none}.wm{font-size:16px}.bar{min-height:72px}}
 @media (max-width:400px){.wm{font-size:14px;letter-spacing:.22em;padding-left:.22em}.lang button{min-width:40px;padding:0 8px}}
 
@@ -132,6 +132,27 @@ figure blockquote{margin:0;flex-grow:1;color:var(--body)}
 figcaption{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:400}
 @media (max-width:900px){.revs{grid-template-columns:1fr}}
 
+/* works */
+.works{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:48px}
+.work{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/5;background:var(--tan)}
+.work img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.work:hover img{transform:scale(1.04)}
+.work span{position:absolute;left:14px;bottom:14px;background:rgba(255,253,250,.92);color:var(--ink);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;font-weight:400}
+a.work-more{display:flex;flex-direction:column;justify-content:flex-end;gap:12px;padding:28px;background:var(--ink);color:var(--ivory);text-decoration:none;transition:background .3s}
+a.work-more:hover{background:var(--clay);color:#fff}
+.work-more b{font-family:var(--serif);font-weight:300;font-size:32px;line-height:1.1}
+.work-more small{font-size:13px;letter-spacing:.1em;color:#D9CFC5}
+@media (max-width:980px){.works{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.work-more b{font-size:24px}}
+/* news */
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:48px}
+.post{border-top:1px solid #CDBDAE;padding-top:28px;display:flex;flex-direction:column;gap:14px}
+.post .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);font-weight:400}
+.post h3{font-size:32px;font-weight:400;line-height:1.1}
+.post p{color:var(--body);font-size:16px}
+.news-foot{margin-top:44px}
+@media (max-width:900px){.posts{grid-template-columns:1fr;gap:8px}}
+@media (prefers-reduced-motion:reduce){.work img{transition:none}.work:hover img{transform:none}}
+
 /* booking */
 .dark{background:var(--ink);color:var(--ivory)}
 .book{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,6vw,96px);align-items:center}
@@ -164,6 +185,8 @@ footer .brand span{color:var(--ivory);font-size:24px}
       <a href="#services" data-i="nav.services"></a>
       <a href="#approach" data-i="nav.approach"></a>
       <a href="#about" data-i="nav.about"></a>
+      <a href="#works" data-i="nav.works"></a>
+      <a href="#news" data-i="nav.news"></a>
       <a href="#booking" data-i="nav.contacts"></a>
     </nav>
     <div class="right">
@@ -230,6 +253,27 @@ footer .brand span{color:var(--ivory);font-size:24px}
     </div>
   </section>
 
+  <section id="works" class="sand">
+    <div class="wrap">
+      <div class="svc-head">
+        <div><div class="eyebrow" data-i="works.eyebrow"></div><h2 data-i="works.title"></h2></div>
+        <p data-i="works.sub"></p>
+      </div>
+      <div class="works" id="works-grid"></div>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="wrap">
+      <div class="svc-head">
+        <div><div class="eyebrow" data-i="news.eyebrow"></div><h2 data-i="news.title"></h2></div>
+        <p data-i="news.sub"></p>
+      </div>
+      <div class="posts" id="posts"></div>
+      <div class="news-foot"><a class="btn btn-line" href="https://www.instagram.com/oksaesthetic/" target="_blank" rel="noopener" data-i="news.follow"></a></div>
+    </div>
+  </section>
+
   <section class="sand">
     <div class="wrap">
       <h2 class="h2" data-i="rev.title"></h2>
@@ -266,7 +310,7 @@ footer .brand span{color:var(--ivory);font-size:24px}
 <script>
 var COPY = {
   RU: {
-    nav:{services:"Услуги",approach:"Подход",about:"О мастере",contacts:"Контакты",book:"Записаться"},
+    nav:{services:"Услуги",approach:"Подход",about:"О мастере",works:"Работы",news:"Новости",contacts:"Контакты",book:"Записаться"},
     hero:{eyebrow:"Кожа · Перманентный макияж · Лазер",title1:"Эстетика,",titleEm:"продуманная лично для вас",
       sub:"Камерная студия, где каждую процедуру проводит один мастер — от первой консультации до результата. Бережные настройки, честные сроки и уход, созданный для вашей кожи.",
       cta1:"Записаться на консультацию",cta2:"Смотреть услуги"},
@@ -288,10 +332,15 @@ var COPY = {
     rev:{title:"Отзывы клиентов",text:"[Реальный отзыв клиента — вставьте из Instagram или Google.]",name:"[Имя клиента]"},
     book:{title1:"Готовы",titleEm:"начать?",sub:"Запишитесь на консультацию — подберём процедуру и составим план под вашу кожу.",cta:"Записаться онлайн",
       contacts:[["Адрес","Открыть на карте","https://share.google/blsX4wNHZhYPYaRaI"],["Телефон","[+00 000 000 000]"],["Instagram","@oksaesthetic"],["Часы работы","[Пн–Сб, 10–19]"]]},
+    works:{eyebrow:"Портфолио",title:"Мои работы",sub:"Реальные результаты клиенток студии.",facial:"Уход за лицом",more:"Больше работ в Instagram"},
+    news:{eyebrow:"Журнал",title:"Новости красоты",sub:"Тренды, советы по уходу и новости студии.",follow:"Больше новостей в Instagram",
+      posts:[{tag:"Перманент",title:"Первые 10 дней после перманента",text:"Что нормально, чего избегать и почему цвет сначала кажется ярче. Памятка по уходу для стойкого результата."},
+        {tag:"Кожа",title:"Осень — лучший сезон для пилингов",text:"Меньше солнца — меньше риск пигментации. Рассказываем, как подготовить кожу и сколько обычно нужно процедур."},
+        {tag:"Лазер",title:"Лазерная эпиляция: мифы и правда",text:"Больно ли? Можно ли летом? Почему нужно несколько процедур? Понятные ответы до начала курса."}]},
     footer:"© 2026 Oksaesthetic. Все права защищены."
   },
   ES: {
-    nav:{services:"Servicios",approach:"Enfoque",about:"Sobre mí",contacts:"Contacto",book:"Reservar"},
+    nav:{services:"Servicios",approach:"Enfoque",about:"Sobre mí",works:"Trabajos",news:"Novedades",contacts:"Contacto",book:"Reservar"},
     hero:{eyebrow:"Piel · Micropigmentación · Láser",title1:"Estética,",titleEm:"pensada solo para ti",
       sub:"Un estudio íntimo donde una sola especialista realiza cada tratamiento, desde la primera consulta hasta el resultado. Ajustes cuidadosos, plazos honestos y un cuidado creado para tu piel.",
       cta1:"Reservar consulta",cta2:"Ver servicios"},
@@ -313,10 +362,15 @@ var COPY = {
     rev:{title:"Opiniones",text:"[Opinión real de una clienta: cópiala de Instagram o Google.]",name:"[Nombre de la clienta]"},
     book:{title1:"¿Lista para",titleEm:"empezar?",sub:"Reserva una consulta: elegiremos el tratamiento y crearemos un plan para tu piel.",cta:"Reservar online",
       contacts:[["Dirección","Ver en Google Maps","https://share.google/blsX4wNHZhYPYaRaI"],["Teléfono","[+00 000 000 000]"],["Instagram","@oksaesthetic"],["Horario","[Lun–Sáb, 10–19]"]]},
+    works:{eyebrow:"Portfolio",title:"Mis trabajos",sub:"Resultados reales de clientas del estudio.",facial:"Tratamiento facial",more:"Más trabajos en Instagram"},
+    news:{eyebrow:"Journal",title:"Novedades de belleza",sub:"Tendencias, consejos de cuidado y novedades del estudio.",follow:"Más novedades en Instagram",
+      posts:[{tag:"Micropigmentación",title:"Los primeros 10 días tras la micropigmentación",text:"Qué es normal, qué evitar y por qué el color se ve más intenso al principio. Cuidados para un resultado duradero."},
+        {tag:"Piel",title:"Otoño, la mejor temporada para los peelings",text:"Menos sol significa menos riesgo de manchas. Cómo preparar la piel y cuántas sesiones suelen hacer falta."},
+        {tag:"Láser",title:"Depilación láser: mitos y realidades",text:"¿Duele? ¿Se puede en verano? ¿Por qué hacen falta varias sesiones? Respuestas claras antes de empezar."}]},
     footer:"© 2026 Oksaesthetic. Todos los derechos reservados."
   },
   EN: {
-    nav:{services:"Services",approach:"Approach",about:"About",contacts:"Contact",book:"Book now"},
+    nav:{services:"Services",approach:"Approach",about:"About",works:"Work",news:"News",contacts:"Contact",book:"Book now"},
     hero:{eyebrow:"Skin · Permanent makeup · Laser",title1:"Aesthetics,",titleEm:"considered just for you",
       sub:"An intimate studio where one specialist performs every treatment, from the first consultation to the result. Gentle settings, honest timelines and care designed around your skin.",
       cta1:"Book a consultation",cta2:"View services"},
@@ -338,6 +392,11 @@ var COPY = {
     rev:{title:"Client reviews",text:"[A real client review — paste it from Instagram or Google.]",name:"[Client name]"},
     book:{title1:"Ready to",titleEm:"begin?",sub:"Book a consultation and we’ll choose the treatment and build a plan around your skin.",cta:"Book online",
       contacts:[["Address","Open in Google Maps","https://share.google/blsX4wNHZhYPYaRaI"],["Phone","[+00 000 000 000]"],["Instagram","@oksaesthetic"],["Hours","[Mon–Sat, 10–19]"]]},
+    works:{eyebrow:"Portfolio",title:"My work",sub:"Real results from studio clients.",facial:"Facial treatment",more:"More work on Instagram"},
+    news:{eyebrow:"Journal",title:"Beauty news",sub:"Trends, skincare tips and studio news.",follow:"More news on Instagram",
+      posts:[{tag:"Permanent makeup",title:"The first 10 days after permanent makeup",text:"What is normal, what to avoid and why the colour looks stronger at first. Aftercare for a lasting result."},
+        {tag:"Skin",title:"Autumn is peel season",text:"Less sun means a lower risk of pigmentation. How to prepare your skin and how many sessions it usually takes."},
+        {tag:"Laser",title:"Laser hair removal: myths and facts",text:"Does it hurt? Can you do it in summer? Why several sessions? Clear answers before you start."}]},
     footer:"© 2026 Oksaesthetic. All rights reserved."
   }
 };
@@ -354,6 +413,10 @@ function render(lang){
       s.list.map(function(i){return '<li><span>'+esc(i)+'</span><span>'+esc(t.svc.from)+'</span></li>';}).join("")+
       '</ul><a class="btn" href="#booking">'+esc(t.svc.cta)+'</a></article>';}).join("");
   document.getElementById("steps").innerHTML=t.proc.steps.map(function(s,i){return '<div class="step"><div class="n">0'+(i+1)+'</div><div><h3>'+esc(s.title)+'</h3><p>'+esc(s.text)+'</p></div></div>';}).join("");
+  var W=[{src:"pmu-lips2.jpg",pos:"50% 50%",label:t.svc.items[1].list[2]},{src:"pmu-brows2.jpg",pos:"50% 50%",label:t.svc.items[1].list[0]},{src:"skin-facial.jpg",pos:"50% 68%",label:t.works.facial}];
+  document.getElementById("works-grid").innerHTML=W.map(function(w){return '<div class="work"><img src="'+w.src+'" alt="'+esc(w.label)+'" loading="lazy" style="object-position:'+w.pos+'"><span>'+esc(w.label)+'</span></div>';}).join("")+
+    '<a class="work work-more" href="https://www.instagram.com/oksaesthetic/" target="_blank" rel="noopener"><small>@oksaesthetic</small><b>'+esc(t.works.more)+' ↗</b></a>';
+  document.getElementById("posts").innerHTML=t.news.posts.map(function(n){return '<article class="post"><div class="tag">'+esc(n.tag)+'</div><h3>'+esc(n.title)+'</h3><p>'+esc(n.text)+'</p></article>';}).join("");
   document.getElementById("revs").innerHTML=[1,2,3].map(function(){return '<figure><div class="q" aria-hidden="true">“</div><blockquote>'+esc(t.rev.text)+'</blockquote><figcaption>'+esc(t.rev.name)+'</figcaption></figure>';}).join("");
   document.getElementById("contacts").innerHTML=t.book.contacts.map(function(c){return '<div><dt>'+esc(c[0])+'</dt><dd>'+(c[2]?'<a href="'+c[2]+'" target="_blank" rel="noopener">'+esc(c[1])+' ↗</a>':c[1].charAt(0)==="@"?'<a href="https://www.instagram.com/oksaesthetic/" target="_blank" rel="noopener">'+esc(c[1])+'</a>':esc(c[1]))+'</dd></div>';}).join("");
   try{localStorage.setItem("oks-lang-v2",lang);}catch(e){}
