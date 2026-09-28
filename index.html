@@ -86,6 +86,12 @@ section{padding-block:clamp(64px,8vw,120px)}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:56px}
 .card{background:var(--paper);border-radius:12px;padding:18px 18px 32px;display:flex;flex-direction:column;gap:24px}
 .card .ph{height:280px;border-radius:999px 999px 8px 8px}
+.card .ph.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:0;overflow:hidden;background:var(--paper)}
+.duo-cell{position:relative;overflow:hidden;min-width:0}
+.duo-cell img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.card:hover .duo-cell img{transform:scale(1.06)}
+.duo-cell span{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(255,253,250,.92);color:var(--ink);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:999px;white-space:nowrap;font-weight:400}
+@media (prefers-reduced-motion:reduce){.duo-cell img{transition:none}.card:hover .duo-cell img{transform:none}}
 .card-in{padding-inline:14px;display:flex;flex-direction:column;gap:12px}
 .card h3{font-size:34px;font-weight:400}
 .card p{color:var(--body);font-size:16px}
@@ -338,8 +344,8 @@ function render(lang){
   document.querySelectorAll("[data-i]").forEach(function(el){var v=get(t,el.getAttribute("data-i"));if(v!=null)el.textContent=v;});
   document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===lang?"true":"false");});
   document.getElementById("pillars").innerHTML=t.phil.pillars.map(function(p){return '<div class="pillar"><h3>'+esc(p.title)+'</h3><p>'+esc(p.text)+'</p></div>';}).join("");
-  document.getElementById("cards").innerHTML=t.svc.items.map(function(s){
-    return '<article class="card"><div class="ph">'+esc(t.photo.service)+'</div><div class="card-in"><h3>'+esc(s.title)+'</h3><p>'+esc(s.desc)+'</p></div><ul>'+
+  document.getElementById("cards").innerHTML=t.svc.items.map(function(s,k){
+    return '<article class="card">'+(k===1?'<div class="ph duo"><div class="duo-cell"><img src="pmu-lips.jpg" alt="'+esc(s.list[2])+'" loading="lazy" style="object-position:62% 50%"><span>'+esc(s.list[2])+'</span></div><div class="duo-cell"><img src="pmu-brows.jpg" alt="'+esc(s.list[0])+'" loading="lazy" style="object-position:42% 50%"><span>'+esc(s.list[0])+'</span></div></div>':'<div class="ph">'+esc(t.photo.service)+'</div>')+'<div class="card-in"><h3>'+esc(s.title)+'</h3><p>'+esc(s.desc)+'</p></div><ul>'+
       s.list.map(function(i){return '<li><span>'+esc(i)+'</span><span>'+esc(t.svc.from)+'</span></li>';}).join("")+
       '</ul><a class="btn" href="#booking">'+esc(t.svc.cta)+'</a></article>';}).join("");
   document.getElementById("steps").innerHTML=t.proc.steps.map(function(s,i){return '<div class="step"><div class="n">0'+(i+1)+'</div><div><h3>'+esc(s.title)+'</h3><p>'+esc(s.text)+'</p></div></div>';}).join("");
