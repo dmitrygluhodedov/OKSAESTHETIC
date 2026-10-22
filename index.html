@@ -130,7 +130,14 @@ section{padding-block:clamp(64px,8vw,120px)}
 @media (max-width:820px){.about{grid-template-columns:1fr}.about .ph,.about .master{max-width:420px}}
 
 /* reviews */
-.revs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:48px}
+.revs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:48px}
+.rev-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+.rev-sum{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:400;letter-spacing:.03em;color:var(--ink);text-decoration:none;border:1px solid #CDBDAE;border-radius:999px;padding:10px 18px;background:var(--paper)}
+.rev-sum:hover{border-color:var(--clay);color:var(--clay)}
+.stars{color:#B8893A;letter-spacing:.08em}
+figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px}
+figcaption a{font-size:12px;letter-spacing:.06em;text-transform:none;font-weight:400}
+figcaption .who .stars{font-size:12px;margin-left:6px}
 figure{margin:0;background:var(--paper);border-radius:12px;padding:36px;display:flex;flex-direction:column;gap:24px}
 figure .q{font-family:var(--serif);font-size:56px;line-height:.5;color:var(--blush)}
 figure blockquote{margin:0;flex-grow:1;color:var(--body)}
@@ -326,7 +333,10 @@ footer .brand span{color:var(--ivory);font-size:24px}
 
   <section class="sand">
     <div class="wrap">
-      <h2 class="h2" data-i="rev.title"></h2>
+      <div class="rev-head">
+        <h2 class="h2" data-i="rev.title"></h2>
+        <a class="rev-sum" id="rev-sum" href="https://share.google/blsX4wNHZhYPYaRaI" target="_blank" rel="noopener"><span class="stars" aria-hidden="true">★★★★★</span><span data-i="rev.summary"></span><span aria-hidden="true">↗</span></a>
+      </div>
       <div class="revs" id="revs"></div>
     </div>
   </section>
@@ -358,6 +368,7 @@ footer .brand span{color:var(--ivory);font-size:24px}
 </footer>
 
 <script>
+var REVIEWS = [{"lang": "ru", "name": "Mariana L.", "text": "Оксана очень приятная девушка с невероятными ручками. Два часа я чувствовала себя как в спа салоне. Прекрасный массаж лица с уходом. Вышла как новорожденная! Спасибо огромное!"}, {"lang": "en", "name": "Oana D.", "text": "This salon improved my skin condition from just one visit. I had a complete facial treatment with peeling and masks. I came with clogged and enlarged pores and left with flawless skin. I totally recommend for personalised beauty treatments in Tenerife. This level of quality is hard to find here. This is now my go to clinic"}, {"lang": "en", "name": "", "text": "I cannot recommend Oksana Beauty Tenerife highly enough! The permanent makeup I had done—eyes, eyebrows, and lips—has truly changed my life and my confidence. […] Oksana is incredibly professional, deeply knowledgeable, and a true perfectionist in everything she does."}, {"lang": "ru", "name": "Marina S.", "text": "Оксана отличный специалист с огромным опытом, перманент делает очень аккуратно и профессионально, я осталась очень довольна. […]"}];
 var COPY = {
   RU: {
     nav:{services:"Услуги",approach:"Подход",about:"О мастере",works:"Работы",news:"Новости",contacts:"Контакты",book:"Записаться"},
@@ -377,7 +388,7 @@ var COPY = {
       {title:"Процедура и уход",text:"Проводим процедуру и даём рекомендации по домашнему уходу."}]},
     about:{eyebrow:"О мастере",title:"Привет, я [ИМЯ]",text:"[Пара предложений о себе: опыт, обучение и сертификаты, почему вы выбрали эстетику и что для вас важно в работе с клиентом.]",
       quote:"«Я хочу, чтобы вы уходили не просто красивой — а уверенной в своей коже.»"},
-    rev:{title:"Отзывы клиентов",text:"[Реальный отзыв клиента — вставьте из Instagram или Google.]",name:"[Имя клиента]"},
+    rev:{title:"Отзывы клиентов",summary:"5,0 · 6 отзывов в Google",link:"Отзыв в Google",anon:"Клиентка"},
     book:{title1:"Готовы",titleEm:"начать?",sub:"Запишитесь на консультацию — подберём процедуру и составим план под вашу кожу.",cta:"Записаться в WhatsApp",
       contacts:[["Адрес","Открыть на карте","https://share.google/blsX4wNHZhYPYaRaI"],["WhatsApp","Написать в WhatsApp","https://wa.me/34603304615"],["Instagram","@oksaesthetic"],["Часы работы","[Пн–Сб, 10–19]"]]},
     works:{eyebrow:"Портфолио",title:"Мои работы",sub:"Реальные результаты клиенток студии.",facial:"Уход за лицом",more:"Больше работ в Instagram"},
@@ -410,7 +421,7 @@ var COPY = {
       {title:"Tratamiento y cuidado",text:"Realizamos el tratamiento y te damos pautas para el cuidado en casa."}]},
     about:{eyebrow:"Sobre mí",title:"Hola, soy [NOMBRE]",text:"[Un par de frases sobre ti: experiencia, formación y certificados, por qué elegiste la estética y qué valoras en el trato con cada clienta.]",
       quote:"«Quiero que salgas no solo guapa, sino segura de tu piel.»"},
-    rev:{title:"Opiniones",text:"[Opinión real de una clienta: cópiala de Instagram o Google.]",name:"[Nombre de la clienta]"},
+    rev:{title:"Opiniones",summary:"5,0 · 6 reseñas en Google",link:"Reseña en Google",anon:"Clienta"},
     book:{title1:"¿Lista para",titleEm:"empezar?",sub:"Reserva una consulta: elegiremos el tratamiento y crearemos un plan para tu piel.",cta:"Reservar por WhatsApp",
       contacts:[["Dirección","Ver en Google Maps","https://share.google/blsX4wNHZhYPYaRaI"],["WhatsApp","Escríbenos por WhatsApp","https://wa.me/34603304615"],["Instagram","@oksaesthetic"],["Horario","[Lun–Sáb, 10–19]"]]},
     works:{eyebrow:"Portfolio",title:"Mis trabajos",sub:"Resultados reales de clientas del estudio.",facial:"Tratamiento facial",more:"Más trabajos en Instagram"},
@@ -443,7 +454,7 @@ var COPY = {
       {title:"Treatment & aftercare",text:"We perform the treatment and give you clear guidance for home care."}]},
     about:{eyebrow:"About",title:"Hi, I’m [NAME]",text:"[A few sentences about you: experience, training and certificates, why you chose aesthetics and what matters to you in caring for each client.]",
       quote:"“I want you to leave not just looking beautiful, but confident in your skin.”"},
-    rev:{title:"Client reviews",text:"[A real client review — paste it from Instagram or Google.]",name:"[Client name]"},
+    rev:{title:"Client reviews",summary:"5.0 · 6 reviews on Google",link:"Review on Google",anon:"Client"},
     book:{title1:"Ready to",titleEm:"begin?",sub:"Book a consultation and we’ll choose the treatment and build a plan around your skin.",cta:"Book on WhatsApp",
       contacts:[["Address","Open in Google Maps","https://share.google/blsX4wNHZhYPYaRaI"],["WhatsApp","Message us on WhatsApp","https://wa.me/34603304615"],["Instagram","@oksaesthetic"],["Hours","[Mon–Sat, 10–19]"]]},
     works:{eyebrow:"Portfolio",title:"My work",sub:"Real results from studio clients.",facial:"Facial treatment",more:"More work on Instagram"},
@@ -485,7 +496,7 @@ function render(lang){
   document.getElementById("works-grid").innerHTML=W.map(function(w){return '<div class="work"><img src="'+w.src+'" alt="'+esc(w.label)+'" loading="lazy" style="object-position:'+w.pos+'"><span>'+esc(w.label)+'</span></div>';}).join("")+
     '<a class="work work-more" href="https://www.instagram.com/oksaesthetic/" target="_blank" rel="noopener"><small>@oksaesthetic</small><b>'+esc(t.works.more)+' ↗</b></a>';
   document.getElementById("posts").innerHTML=t.news.posts.map(function(n){return '<article class="post"><div class="tag">'+esc(n.tag)+'</div><h3>'+esc(n.title)+'</h3><p>'+esc(n.text)+'</p></article>';}).join("");
-  document.getElementById("revs").innerHTML=[1,2,3].map(function(){return '<figure><div class="q" aria-hidden="true">“</div><blockquote>'+esc(t.rev.text)+'</blockquote><figcaption>'+esc(t.rev.name)+'</figcaption></figure>';}).join("");
+  document.getElementById("revs").innerHTML=REVIEWS.map(function(r){return '<figure><div class="q" aria-hidden="true">“</div><blockquote lang="'+r.lang+'">'+esc(r.text)+'</blockquote><figcaption><span class="who">'+esc(r.name||t.rev.anon)+'<span class="stars" aria-label="5/5"> ★★★★★</span></span><a href="https://share.google/blsX4wNHZhYPYaRaI" target="_blank" rel="noopener">'+esc(t.rev.link)+' ↗</a></figcaption></figure>';}).join("");
   document.getElementById("contacts").innerHTML=t.book.contacts.map(function(c){return '<div><dt>'+esc(c[0])+'</dt><dd>'+(c[2]?'<a href="'+c[2]+'" target="_blank" rel="noopener">'+esc(c[1])+' ↗</a>':c[1].charAt(0)==="@"?'<a href="https://www.instagram.com/oksaesthetic/" target="_blank" rel="noopener">'+esc(c[1])+'</a>':esc(c[1]))+'</dd></div>';}).join("");
   try{localStorage.setItem("oks-lang-v2",lang);}catch(e){}
 }
